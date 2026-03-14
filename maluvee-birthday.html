@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Maluvee</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  text-align:center;
+  color:white;
+  overflow:hidden;
+  background:linear-gradient(-45deg,#ff4fa3,#8e44ad,#3498db,#ff9a9e);
+  background-size:400% 400%;
+  animation:bgmove 10s infinite;
+}
+@keyframes bgmove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.page{
+  display:none;
+  height:100vh;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+}
+
+.show{display:flex;}
+
+button{
+  padding:12px 25px;
+  border:none;
+  border-radius:30px;
+  background:#ff4fa3;
+  color:white;
+  font-size:16px;
+  margin-top:20px;
+  cursor:pointer;
+}
+
+.cake{
+  font-size:100px;
+  margin:20px;
+  cursor:pointer;
+  animation:bounce 2s infinite;
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.message{
+  max-width:400px;
+  line-height:1.6;
+  font-size:16px;
+}
+
+.hearts{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear forwards;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1}
+  100%{transform:translateY(-100vh);opacity:0}
+}
+
+.confetti{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background: #ff4fa3;
+  top:0;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall{
+  0%{top:-10px;opacity:1;}
+  100%{top:100vh;opacity:0;}
+}
+
+.stars{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size:40px 40px;
+  opacity:0.3;
+  z-index:-1;
+}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page show">
+<h1>🎁 A Surprise For You</h1>
+<p>Someone made a special birthday surprise!</p>
+<button onclick="nextPage(2)">Open 💌</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page">
+<h1>🎂 Your Birthday Cake 🎂</h1>
+<div class="cake" id="cake" onclick="blowCandles()">🎂👑🐱</div>
+<p>Tap the cake to blow the candles 🕯</p>
+<button onclick="nextPage(3)">See Your Message 🎈</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page">
+<h1>💌 Your Birthday Message 💌</h1>
+<div class="message">
+<p><b>Dear Maaluveee,</b></p>
+<p>Today is a special day because someone who once meant the whole world to me came into this world.<br>
+No matter what happened between us, the respect and care I have for you never changed.</p>
+<p>I truly hope life gives you happiness, peace, and everything you dream about.</p>
+<p>Stay blessed and keep smiling. 🌷</p>
+<p><b>Lovveeeee youhhhhhhhh moreee 💕</b></p>
+</div>
+<button onclick="celebrate()">Celebrate 🎉</button>
+</div>
+
+<!-- Happy Birthday piano music -->
+<audio id="music">
+  <source src="https://cdn.pixabay.com/download/audio/2023/03/15/audio_1b93f6c4ea.mp3?filename=happy-birthday-piano-110689.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function nextPage(num){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+  document.getElementById("page"+num).classList.add("show");
+}
+
+function celebrate(){
+  document.getElementById("music").play();
+
+  for(let i=0;i<40;i++){
+    let heart=document.createElement("div");
+    heart.className="hearts";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"%";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  }
+
+  for(let i=0;i<100;i++){
+    let confetti=document.createElement("div");
+    confetti.className="confetti";
+    confetti.style.left=Math.random()*100+"%";
+    confetti.style.background=["#ff4fa3","#ffec42","#42f5ec","#f542a7"][Math.floor(Math.random()*4)];
+    confetti.style.width=(5+Math.random()*10)+"px";
+    confetti.style.height=(5+Math.random()*10)+"px";
+    confetti.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(confetti);
+    setTimeout(()=>confetti.remove(),4000);
+  }
+}
+
+function blowCandles(){
+  alert("🕯 Candles blown! Make a wish! 🌟");
+}
+</script>
+
+</body>
+</html>
